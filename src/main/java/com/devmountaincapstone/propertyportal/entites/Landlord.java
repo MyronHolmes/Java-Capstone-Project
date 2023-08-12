@@ -1,76 +1,63 @@
 package com.devmountaincapstone.propertyportal.entites;
 
+import com.devmountaincapstone.propertyportal.dtos.LandlordDto;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.hibernate.engine.internal.Cascade;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "LandLords")
+@Table(name = "Landlords")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Landlord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name= "email", unique = true)
     private String email;
+
+    @Column(name= "username", unique = true)
     private String username;
+
+    @Column(name = "password")
     private String password;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Property property;
 
+    @OneToMany(mappedBy = "landlord", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Property> propertySet = new HashSet<>();
 
-    public Long getId() {
-        return id;
+    public Landlord(LandlordDto landlordDto){
+        if (landlordDto.getFirstName() != null){
+            this.firstName = landlordDto.getFirstName();
+        }
+        if (landlordDto.getLastName() != null){
+            this.lastName = landlordDto.getFirstName();
+        }
+        if (landlordDto.getEmail() != null) {
+            this.email = landlordDto.getEmail();
+        }
+        if (landlordDto.getUsername() != null){
+            this.username = landlordDto.getUsername();
+        }
+        if (landlordDto.getPassword() != null){
+            this.password = landlordDto.getPassword();
+        }
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
-    }
 }
