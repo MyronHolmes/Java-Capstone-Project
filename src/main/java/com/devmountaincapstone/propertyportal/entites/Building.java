@@ -30,7 +30,7 @@ public class Building {
 
     @OneToMany(mappedBy = "building", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<BuildingUnit> buildingUnitSet = new HashSet<>();
+    private Set<Unit> unitSet = new HashSet<>();
 
     public Building(BuildingDto buildingDto){
         if (buildingDto.getBuildingNumber() != null){

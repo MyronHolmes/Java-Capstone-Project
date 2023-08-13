@@ -1,6 +1,6 @@
 package com.devmountaincapstone.propertyportal.entites;
 
-import com.devmountaincapstone.propertyportal.dtos.BuildingUnitDto;
+import com.devmountaincapstone.propertyportal.dtos.UnitDto;
 import com.devmountaincapstone.propertyportal.enumerations.UnitType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BuildingUnit {
+public class Unit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,7 +40,7 @@ public class BuildingUnit {
     @JsonBackReference
     private Building building;
 
-    public BuildingUnit(BuildingUnitDto buildingUnitDto){
+    public Unit(UnitDto buildingUnitDto){
         if (buildingUnitDto.getUnitNumber() != null){
             this.unitNumber = buildingUnitDto.getUnitNumber();
         }

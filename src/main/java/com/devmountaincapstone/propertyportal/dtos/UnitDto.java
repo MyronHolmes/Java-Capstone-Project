@@ -1,6 +1,6 @@
 package com.devmountaincapstone.propertyportal.dtos;
 
-import com.devmountaincapstone.propertyportal.entites.BuildingUnit;
+import com.devmountaincapstone.propertyportal.entites.Unit;
 import com.devmountaincapstone.propertyportal.enumerations.UnitType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BuildingUnitDto implements Serializable {
+public class UnitDto implements Serializable {
     private Long id;
     private Integer unitNumber;
     private UnitType unitType;
@@ -21,7 +21,7 @@ public class BuildingUnitDto implements Serializable {
     private Byte[] thumbnail;
     private BuildingDto buildingDto;
 
-    public BuildingUnitDto(BuildingUnit buildingUnit){
+    public UnitDto(Unit buildingUnit){
         if (buildingUnit.getId() != null){
             this.id = buildingUnit.getId();
         }

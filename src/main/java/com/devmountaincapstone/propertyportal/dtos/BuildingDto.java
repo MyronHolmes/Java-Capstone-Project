@@ -1,12 +1,9 @@
 package com.devmountaincapstone.propertyportal.dtos;
 
 import com.devmountaincapstone.propertyportal.entites.Building;
-import com.devmountaincapstone.propertyportal.entites.BuildingUnit;
-import com.devmountaincapstone.propertyportal.entites.Property;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -19,7 +16,7 @@ public class BuildingDto implements Serializable {
     private Long id;
     private Integer buildingNumber;
     private PropertyDto propertyDto;
-    private Set<BuildingUnitDto> buildingUnitDtoSet = new HashSet<>();
+    private Set<UnitDto> unitDtoSet = new HashSet<>();
 
 
     public BuildingDto(Building building){
