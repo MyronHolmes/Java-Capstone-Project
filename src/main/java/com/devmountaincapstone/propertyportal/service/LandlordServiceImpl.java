@@ -2,19 +2,51 @@ package com.devmountaincapstone.propertyportal.service;
 
 
 import com.devmountaincapstone.propertyportal.dtos.LandlordDto;
+import com.devmountaincapstone.propertyportal.entites.Landlord;
 import com.devmountaincapstone.propertyportal.repository.LandlordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class LandlordServiceImpl {
+public class LandlordServiceImpl implements LandlordService {
     @Autowired
     private LandlordRepository landlordRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
+    @Transactional
+    public List<String> addLandlord(LandlordDto landlordDto){
+        List<String> response = new ArrayList<>();
+        Landlord landlord = new Landlord(landlordDto);
+        landlordRepository.saveAndFlush(landlord);
+        response.add("Landlord Added Successfully");
+        return response;
+    }
+
+
+    @Override
+    public List<String> landLordLogin(LandlordDto landlordDto){
+        List<String> response = new ArrayList<>();
+        Optional<Landlord> landlordOptional = landlordRepository.findByUsername(landlordDto.getUsername());
+
+        if (landlordOptional.isPresent()){
+            if (passwordEncoder.matches(landlordDto.getPassword(), landlordOptional.get().getPassword())){
+                response.add("Welcome to Property Portal " + landlordDto.getFirstName() + ".");
+                response.add(String.valueOf(landlordOptional.get().getId()));
+            }else {
+                response.add("Username or password incorrect");
+            }
+        }else {
+            response.add("Username or password incorrect");
+        }
+
+        return response;
+    }
 }
