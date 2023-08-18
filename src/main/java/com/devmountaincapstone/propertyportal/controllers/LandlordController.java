@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dev/envi/landlords")
+@RequestMapping("/landlords")
 public class LandlordController {
     @Autowired
     private LandlordService landlordService;
