@@ -6,6 +6,7 @@ import com.devmountaincapstone.propertyportal.entites.Building;
 import com.devmountaincapstone.propertyportal.entites.Unit;
 import com.devmountaincapstone.propertyportal.repository.BuildingRepository;
 import com.devmountaincapstone.propertyportal.repository.UnitRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +17,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class UnitServiceImpl implements UnitService {
+    @Autowired
     private UnitRepository unitRepository;
+    @Autowired
     private BuildingRepository buildingRepository;
+
 
     @Override
     @Transactional
@@ -50,6 +54,7 @@ public class UnitServiceImpl implements UnitService {
             unitRepository.saveAndFlush(unit);
         });
     }
+
 
     @Override
     public List<UnitDto> getAllUnitsByBuildingId(Long buildingId){

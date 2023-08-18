@@ -10,6 +10,7 @@ public interface UnitService {
     @Transactional
     void addUnit(UnitDto unitDto, Long buildingId);
 
+    @Transactional
     void deleteUnit(Long unitId);
 
     @Transactional

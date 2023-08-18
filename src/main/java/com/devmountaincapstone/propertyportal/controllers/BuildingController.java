@@ -2,7 +2,6 @@ package com.devmountaincapstone.propertyportal.controllers;
 
 
 import com.devmountaincapstone.propertyportal.dtos.BuildingDto;
-import com.devmountaincapstone.propertyportal.dtos.PropertyDto;
 import com.devmountaincapstone.propertyportal.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
