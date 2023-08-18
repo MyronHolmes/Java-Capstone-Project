@@ -14,7 +14,7 @@ public interface BuildingService {
     void deleteBuilding(Long buildingId);
 
     @Transactional
-    void updateBuilding(BuildingDto buildingDto);
+    void updateBuildingById(BuildingDto buildingDto);
 
     List<BuildingDto> getAllBuildingsByPropertyId(Long propertyId);
 

@@ -19,7 +19,6 @@ public class UnitServiceImpl implements UnitService {
     private UnitRepository unitRepository;
     private BuildingRepository buildingRepository;
 
-
     @Override
     @Transactional
     public void addUnit(UnitDto unitDto, Long buildingId){
@@ -30,6 +29,7 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
+    @Transactional
     public void deleteUnit(Long unitId){
         Optional<Unit> unitOptional = unitRepository.findById(unitId);
         unitOptional.ifPresent(unit -> {
@@ -39,8 +39,8 @@ public class UnitServiceImpl implements UnitService {
 
     @Override
     @Transactional
-    public void updateUnit(UnitDto unitDto, Long unitId){
-        Optional<Unit> unitOptional = unitRepository.findById(unitId);
+    public void updateUnitById(UnitDto unitDto){
+        Optional<Unit> unitOptional = unitRepository.findById(unitDto.getId());
         unitOptional.ifPresent(unit -> {
             unit.setUnitNumber(unitDto.getUnitNumber());
             unit.setUnitType(unitDto.getUnitType());
@@ -55,7 +55,7 @@ public class UnitServiceImpl implements UnitService {
     public List<UnitDto> getAllUnitsByBuildingId(Long buildingId){
         Optional<Building> buildingOptional = buildingRepository.findById(buildingId);
         if (buildingOptional.isPresent()){
-            List<Unit> unitList = unitRepository.findAllByBuildingEquals(buildingOptional.get());
+            List<Unit> unitList = unitRepository.findByBuildingEquals(buildingOptional.get());
             return unitList.stream().map(unit -> new UnitDto(unit)).collect(Collectors.toList());
         }
         return Collections.emptyList();

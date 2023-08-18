@@ -46,7 +46,7 @@ public class Landlord {
             this.firstName = landlordDto.getFirstName();
         }
         if (landlordDto.getLastName() != null){
-            this.lastName = landlordDto.getFirstName();
+            this.lastName = landlordDto.getLastName();
         }
         if (landlordDto.getEmail() != null) {
             this.email = landlordDto.getEmail();

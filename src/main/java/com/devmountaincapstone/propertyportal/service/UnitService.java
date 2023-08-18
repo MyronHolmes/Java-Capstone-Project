@@ -13,7 +13,7 @@ public interface UnitService {
     void deleteUnit(Long unitId);
 
     @Transactional
-    void updateUnit(UnitDto unitDto, Long unitId);
+    void updateUnitById(UnitDto unitDto);
 
     List<UnitDto> getAllUnitsByBuildingId(Long buildingId);
 

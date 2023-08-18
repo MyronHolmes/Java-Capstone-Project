@@ -29,7 +29,7 @@ public class LandlordDto implements Serializable {
             this.firstName = landlord.getFirstName();
         }
         if (landlord.getLastName() != null){
-            this.lastName = landlord.getFirstName();
+            this.lastName = landlord.getLastName();
         }
         if (landlord.getEmail() != null) {
             this.email = landlord.getEmail();

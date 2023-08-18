@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface UnitRepository extends JpaRepository<Unit, Long> {
-    List<Unit> findAllByBuildingEquals(Building building);
+    List<Unit> findByBuildingEquals(Building building);
 }

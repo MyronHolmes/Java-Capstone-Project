@@ -20,22 +20,21 @@ public class PropertyDto implements Serializable {
     private String propertyName;
     private BigDecimal projectedEarnings;
     private LandlordDto landlordDto;
-    private Set<BuildingDto> buildingDtoSetSet = new HashSet<>();
+    private Set<BuildingDto> buildingDtoSet = new HashSet<>();
 
 
-    public PropertyDto(Property property){
-        if (property.getId() != null){
+    public PropertyDto(Property property) {
+        if (property.getId() != null) {
             this.id = property.getId();
         }
-        if (property.getPropertyName() != null){
+        if (property.getPropertyName() != null) {
             this.propertyName = property.getPropertyName();
         }
-        if (property.getProjectedEarnings() != null){
+        if (property.getProjectedEarnings() != null) {
             this.projectedEarnings = property.getProjectedEarnings();
+
         }
 
     }
-
-
 
 }

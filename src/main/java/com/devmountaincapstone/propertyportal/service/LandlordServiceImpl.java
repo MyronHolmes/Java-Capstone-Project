@@ -2,7 +2,9 @@ package com.devmountaincapstone.propertyportal.service;
 
 
 import com.devmountaincapstone.propertyportal.dtos.LandlordDto;
+import com.devmountaincapstone.propertyportal.dtos.UnitDto;
 import com.devmountaincapstone.propertyportal.entites.Landlord;
+import com.devmountaincapstone.propertyportal.entites.Unit;
 import com.devmountaincapstone.propertyportal.repository.LandlordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +40,7 @@ public class LandlordServiceImpl implements LandlordService {
 
         if (landlordOptional.isPresent()){
             if (passwordEncoder.matches(landlordDto.getPassword(), landlordOptional.get().getPassword())){
-                response.add("Welcome to Property Portal " + landlordDto.getFirstName() + ".");
+                response.add("Hello " + landlordOptional.get().getFirstName() + ", Welcome To Property Portal.");
                 response.add(String.valueOf(landlordOptional.get().getId()));
             }else {
                 response.add("Username or password incorrect");

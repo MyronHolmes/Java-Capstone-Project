@@ -32,6 +32,7 @@ public class BuildingServiceImpl implements BuildingService {
         Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
         Building building = new Building(buildingDto);
         propertyOptional.ifPresent(building::setProperty);
+        buildingRepository.saveAndFlush(building);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     @Transactional
-    public void updateBuilding(BuildingDto buildingDto){
+    public void updateBuildingById(BuildingDto buildingDto){
         Optional<Building> buildingOptional = buildingRepository.findById(buildingDto.getId());
         buildingOptional.ifPresent(building -> {
             building.setBuildingNumber(buildingDto.getBuildingNumber());
