@@ -28,7 +28,7 @@ public class LandlordServiceImpl implements LandlordService {
         List<String> response = new ArrayList<>();
         Landlord landlord = new Landlord(landlordDto);
         landlordRepository.saveAndFlush(landlord);
-        response.add("Landlord Added Successfully");
+        response.add("http://localhost:8080/login.html");
         return response;
     }
 
