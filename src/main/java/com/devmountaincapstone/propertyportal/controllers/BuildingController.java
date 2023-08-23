@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/dev/envi/buildings")
+@RequestMapping("buildings")
 public class BuildingController {
     @Autowired
     private BuildingService buildingService;

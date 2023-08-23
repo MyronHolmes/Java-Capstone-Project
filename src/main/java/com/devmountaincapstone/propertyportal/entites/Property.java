@@ -29,6 +29,7 @@ public class Property {
     @Column(name = "projected_earnings")
     private BigDecimal projectedEarnings;
 
+
     @ManyToOne
     @JsonBackReference
     private Landlord landlord;

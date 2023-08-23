@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/dev/envi/properties")
+@RequestMapping("properties")
 public class PropertyController {
     @Autowired
     private PropertyService propertyService;

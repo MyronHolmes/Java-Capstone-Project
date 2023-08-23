@@ -40,12 +40,15 @@ public class LandlordServiceImpl implements LandlordService {
 
         if (landlordOptional.isPresent()){
             if (passwordEncoder.matches(landlordDto.getPassword(), landlordOptional.get().getPassword())){
-                response.add("Hello " + landlordOptional.get().getFirstName() + ", Welcome To Property Portal.");
+                response.add("http://localhost:8080/properties.html");
                 response.add(String.valueOf(landlordOptional.get().getId()));
+                response.add(String.valueOf(landlordOptional.get().getFirstName()));
             }else {
+                response.add("http://localhost:8080/login.html");
                 response.add("Username or password incorrect");
             }
         }else {
+            response.add("http://localhost:8080/login.html");
             response.add("Username or password incorrect");
         }
 
