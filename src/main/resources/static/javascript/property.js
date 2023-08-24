@@ -1,8 +1,4 @@
-const cookieArr = document.cookie.split('=');
-const userId = cookieArr[1]
-console.log(cookieArr)
-console.log(cookieArr[1])
-
+const userId = getCookie("userId")
 
 const propertyName= document.getElementById("property-name");
 const propertyEarnings = document.getElementById("property-earnings");
@@ -13,17 +9,17 @@ const propertyList = document.getElementById("property-list");
 const headers = {
     'Content-Type':'application/json'
 };
-const baseUrl = 'http://localhost:8080/properties';
+const baseUrl = 'http://localhost:8080/properties'
 
 const listProperties = arr =>{
-    for(i = 0; i < arr.length; i++){
+    for(let i = 0; i < arr.length; i++){
 
         let li = document.createElement("li");
+        setCookie(`${arr[i].propertyName}`, `${arr[i].id}`)
         li.innerText= ''
         li.innerText= `${arr[i].propertyName}`
         propertyList.appendChild(li);
         propertyContainer.appendChild(propertyList);
-
     }
 }
 
@@ -40,7 +36,7 @@ const getProperties= async (userId) =>{
 
 }
 
-const handleSubmit = async (e) =>{
+const addProperty = async (e) =>{
     e.preventDefault();
     let bodyObj ={
         propertyName: propertyName.value,
@@ -65,8 +61,34 @@ const handleSubmit = async (e) =>{
         propertyEarnings.value = '';
         return getProperties(userId);
     }
+};
+
+const handleLogout = () =>{
+    let c = document.cookie.split(";");
+    for (let i in c){
+        document.cookie = /^[^=]+/.exec(c[i])[0]+"=;expires= Thu, 01 Jan 1970 00:00:00 GMT"
+    }
 }
 
-getProperties(userId);
+function setCookie(name, value){
+    document.cookie = `${name}=${value}`
+}
 
-propertyForm.addEventListener("submit", handleSubmit)
+function getCookie(name){
+    const cDecoded = decodeURIComponent(document.cookie);
+    const cArr =cDecoded.split('; ');
+    let result = null;
+
+    cArr.forEach(ele =>{
+        if (ele.indexOf(name) === 0){
+            result = ele.substring(name.length + 1)
+        }
+    })
+    return result;
+}
+
+getProperties(userId)
+console.log(document.cookie)
+
+
+propertyForm.addEventListener("submit", addProperty)

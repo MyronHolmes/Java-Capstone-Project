@@ -34,6 +34,8 @@ const handelLoginSubmit = async (e) =>{
             window.location.replace(responseArr[0]);
 
         }
+        username.value ='';
+        password.value='';
 
     }
 };
