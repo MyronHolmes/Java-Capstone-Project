@@ -17,13 +17,12 @@ const handelLoginSubmit = async (e) =>{
         password: password.value
     }
 
-    const response =
-        await fetch(`${baseUrl}/login`, {
+    const response = await fetch(`${baseUrl}/login`, {
             method:"POST",
             body: JSON.stringify(bodyObj),
             headers: headers
     })
-            .catch(err => console.error(err.messages))
+        .catch(err => console.error(err.messages))
 
     const responseArr = await response.json()
     if(response.status === 200){

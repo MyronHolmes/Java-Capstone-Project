@@ -27,7 +27,7 @@ public class Property {
 
 
     @Column(name = "projected_earnings")
-    private BigDecimal projectedEarnings;
+    private BigDecimal projectedEarnings = new BigDecimal("0.00");
 
 
     @ManyToOne
