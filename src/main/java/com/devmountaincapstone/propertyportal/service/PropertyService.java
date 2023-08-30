@@ -19,4 +19,6 @@ public interface PropertyService {
     List<PropertyDto> getAllPropertiesByLandlordId(Long landlordId);
 
     Optional<PropertyDto> getPropertyById(Long propertyId);
+
+    List<String> propertyBuildings(Long propertyId);
 }

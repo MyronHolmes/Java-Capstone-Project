@@ -1,6 +1,7 @@
 package com.devmountaincapstone.propertyportal.controllers;
 
 
+import com.devmountaincapstone.propertyportal.dtos.LandlordDto;
 import com.devmountaincapstone.propertyportal.dtos.PropertyDto;
 import com.devmountaincapstone.propertyportal.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,10 @@ public class PropertyController {
     @DeleteMapping("/{propertyId}")
     public void deletePropertyById(@PathVariable Long propertyId){
         propertyService.deletePropertyById(propertyId);
+    }
+
+    @GetMapping("/{propertyId}/buildings")
+    public List<String> propertyBuildings(@PathVariable Long propertyId){
+        return propertyService.propertyBuildings(propertyId);
     }
 }

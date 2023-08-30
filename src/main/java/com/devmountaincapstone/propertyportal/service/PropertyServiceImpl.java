@@ -1,6 +1,7 @@
 package com.devmountaincapstone.propertyportal.service;
 
 
+import com.devmountaincapstone.propertyportal.dtos.LandlordDto;
 import com.devmountaincapstone.propertyportal.dtos.PropertyDto;
 import com.devmountaincapstone.propertyportal.entites.Landlord;
 import com.devmountaincapstone.propertyportal.entites.Property;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +27,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public void addProperty(PropertyDto propertyDto, Long landlordId){
+    public void addProperty(PropertyDto propertyDto, Long landlordId) {
         Optional<Landlord> landlordOptional = landlordRepository.findById(landlordId);
         Property property = new Property(propertyDto);
         landlordOptional.ifPresent(property::setLandlord);
@@ -34,14 +36,14 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     @Transactional
-    public void deletePropertyById(Long propertyId){
+    public void deletePropertyById(Long propertyId) {
         Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
         propertyOptional.ifPresent(property -> propertyRepository.delete(property));
     }
 
     @Override
     @Transactional
-    public void updatePropertyById(PropertyDto propertyDto){
+    public void updatePropertyById(PropertyDto propertyDto) {
         Optional<Property> propertyOptional = propertyRepository.findById(propertyDto.getId());
         propertyOptional.ifPresent(property -> {
             property.setPropertyName(propertyDto.getPropertyName());
@@ -50,9 +52,9 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<PropertyDto> getAllPropertiesByLandlordId(Long landlordId){
+    public List<PropertyDto> getAllPropertiesByLandlordId(Long landlordId) {
         Optional<Landlord> landlordOptional = landlordRepository.findById(landlordId);
-        if (landlordOptional.isPresent()){
+        if (landlordOptional.isPresent()) {
             List<Property> propertyList = propertyRepository.findByLandlordEquals(landlordOptional.get());
             return propertyList.stream().map(property -> new PropertyDto(property)).collect(Collectors.toList());
         }
@@ -61,11 +63,27 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public Optional<PropertyDto> getPropertyById(Long propertyId){
+    public Optional<PropertyDto> getPropertyById(Long propertyId) {
         Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
-        if (propertyOptional.isPresent()){
+        if (propertyOptional.isPresent()) {
             return Optional.of(new PropertyDto(propertyOptional.get()));
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<String> propertyBuildings(Long propertyId){
+        List<String> response = new ArrayList<>();
+        Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
+
+        if (propertyOptional.isPresent()){
+            response.add("http://localhost:8080/buildings.html");
+            response.add(String.valueOf(propertyOptional.get().getId()));
+            response.add(String.valueOf(propertyOptional.get().getPropertyName()));
+
+            }else{
+                response.add("error");
+        }
+        return response;
     }
 }

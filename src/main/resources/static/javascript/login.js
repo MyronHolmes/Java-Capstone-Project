@@ -27,7 +27,7 @@ const handelLoginSubmit = async (e) =>{
     const responseArr = await response.json()
     if(response.status === 200){
         if(responseArr.length === 2){
-            alert((responseArr[1]))
+            alert(responseArr[1])
         }else{
             document.cookie = `userId=${responseArr[1]}`;
             alert(`Welcome To Property Portal ${responseArr[2]}!`)

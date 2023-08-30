@@ -7,12 +7,36 @@
     <link rel="stylesheet" href="./css/buildings.css" type="text/css">
 
 
-    <title>Title</title>
+    <title>Property Portal</title>
 </head>
 <body>
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+        <a class="nav-link" href="./profile.html">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="./properties.html">Properties</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="./login.html" onclick="handleLogout()">Logout</a>
+    </li>
+</ul>
+<h1 class="mx-auto" style="width: 200px;">Properties Buildings:</h1>
+<div id="building-form-container">
+    <form id="building-form">
+        <div class="form-group">
+            <label for="building-number">Building Number</label>
+            <input type="text" class="form-control" id="building-number" placeholder="BUILDING NUMBER">
+        </div>
+        <div class="mt-1">
+            <button id="submit-button" type="submit" class="btn btn-primary mt-1">Add</button>
+        </div>
+    </form>
 
-
-
+    <div id="property-container" class="w-auto h-auto d-flex justify-content-center border border-dark mt-5">
+        <ol id="building-list"></ol>
+    </div>
+</div>
 <script src="./javascript/buildings.js"></script>
 
 </body>
