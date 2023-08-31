@@ -22,7 +22,7 @@ public class Building {
     private Long id;
 
     @Column(name = "building_number")
-    private Integer buildingNumber;
+    private Long buildingNumber;
 
     @ManyToOne
     @JsonBackReference

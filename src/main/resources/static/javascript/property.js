@@ -73,6 +73,7 @@ const addProperty = async (e) =>{
         projectedEarnings: propertyEarnings.value
     }
 
+
     if (bodyObj.propertyName.length === 0){
         alert("Invalid entry")
     }else {
@@ -84,12 +85,11 @@ const addProperty = async (e) =>{
         })
             .catch(err => console.error(err.message))
         if (response.status === 200) {
-
+            propertyName.value= '';
+            propertyEarnings.value = '';
         }
 
-        propertyName.value= '';
-        propertyEarnings.value = '';
-        return getProperties(userId);
+
     }
 };
 

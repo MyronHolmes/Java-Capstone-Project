@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class BuildingDto implements Serializable {
     private Long id;
-    private Integer buildingNumber;
+    private Long buildingNumber;
     private PropertyDto propertyDto;
     private Set<UnitDto> unitDtoSet = new HashSet<>();
 
