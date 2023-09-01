@@ -12,6 +12,7 @@ const headers = {
 const baseUrl = 'http://localhost:8080/properties'
 
 const listProperties = arr =>{
+    console.log(arr)
     for(let i = 0; i < arr.length; i++){
 
 
@@ -87,8 +88,9 @@ const addProperty = async (e) =>{
         if (response.status === 200) {
             propertyName.value= '';
             propertyEarnings.value = '';
-        }
+            return getProperties(userId)
 
+        }
 
     }
 };
