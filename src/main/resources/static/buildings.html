@@ -49,11 +49,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="text" id="building-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="save-button" class="btn btn-primary">Save</button>
+                <form id="edit-building-form">
+                    <div class="form-group">
+                        <label for="edit-building-number">Building Number</label>
+                        <input type="text" class="form-control" id="edit-building-number" placeholder="test">
+                    </div>
+                    <div class="mt-1 modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="save-button" class="btn btn-primary" data-building-id>Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

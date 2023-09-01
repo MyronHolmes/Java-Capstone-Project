@@ -4,8 +4,10 @@ const propertyName = document.getElementById("propertyBuilding");
 const buildingForm = document.getElementById("building-form");
 const buildingNumber = document.getElementById("building-number");
 const buildingContainer = document.getElementById("building-container");
-let buildingBody =document.getElementById("building-body");
-let updateBodyBtn= document.getElementById("save-button")
+let updateBodyBtn= document.getElementById("save-button");
+let editForm= document.getElementById("edit-building-form");
+let editBuildingNumber = document.getElementById("edit-building-number");
+
 
 
 const userId = getCookie("userId");
@@ -23,8 +25,6 @@ const addBuilding = async (e)=>{
     bodyObj = {
         buildingNumber: buildingNumber.value
     }
-    console.log(buildingNumber.value)
-    console.log("property" + propertyId)
 
     if (bodyObj.buildingNumber.length === 0){
         alert("Invalid entry")
@@ -56,6 +56,21 @@ const getBuildings = async (propertyId)=>{
         .catch((err=> console.error(err)))
 };
 
+const handleBuildingEdit= async (buildingId)=>{
+    let bodyObj ={
+        id: buildingId,
+        body: editBuildingNumber.getAttribute("data-building-id")
+    }
+    await fetch(baseUrl + buildingId, {
+        method: "PUT",
+        body: JSON.stringify(bodyObj),
+        headers: headers
+    })
+        .catch(err => console.error(err))
+
+    return getBuildings(propertyId)
+}
+
 const getBuildingById = async (buildingId)=>{
     await fetch(baseUrl + buildingId, {
         method:"GET",
@@ -66,20 +81,14 @@ const getBuildingById = async (buildingId)=>{
         .catch(err => console.error(err.message))
 };
 
-const handleBuildingEdit= async (buildingId)=>{
-    let bodyObj ={
-        id: bodyId,
-        body: buildingBody.value
-    }
-    await fetch(baseUrl, {
-        method: "PUT",
-        body: JSON.stringify(bodyObj),
-        headers: headers
-    })
-        .catch(err => console.error(err))
+const populateModal = (obj)=>{
 
-    return getBuildings(propertyId)
-}
+    console.log(obj)
+    editBuildingNumber.innerText= ""
+    editBuildingNumber.innerText= obj.buildingNumber
+
+    updateBodyBtn.setAttribute('data-building-id', obj.id)
+};
 
 const createCard= (arr) =>{
     buildingContainer.innerHTML=''
@@ -89,7 +98,7 @@ const createCard= (arr) =>{
         buildingCard.innerHTML= `
             <div class="card d-flex" style="width: 18rem; height: 18rem;">
                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">
-                    <p class="card-text">${obj.buildingNumber}</p>
+                    <p class="card-text" id="card-${obj.id}">${obj.buildingNumber}</p>
                     <div class="d-flex justify-content-between">
                     <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" id="edit-btn-${obj.id}" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="getBuildingById(${obj.id})">
@@ -100,21 +109,12 @@ const createCard= (arr) =>{
                 </div>
             </div>
 `
-
-
+        editBuildingNumber.innerText= obj.buildingNumber
         buildingContainer.appendChild(buildingCard);
-        document.body.appendChild(buildingContainer)
-        let editBtn = document.getElementById(`edit-btn-${obj.id}`)
-
     })
 };
 
-const populateModal = (obj)=>{
-    console.log(obj.buildingNumber)
-    buildingBody.innerText=''
-    buildingBody.innerText= obj.buildingNumber
-    updateBodyBtn.setAttribute('data-building-id', obj.id)
-}
+
 
 
 
@@ -139,5 +139,6 @@ getBuildings(propertyId);
 buildingForm.addEventListener("submit", addBuilding);
 updateBodyBtn.addEventListener("click", (e)=>{
     let buildingId = e.target.getAttribute("data-building-id")
+    console.log(buildingId)
     handleBuildingEdit(buildingId)
 })
