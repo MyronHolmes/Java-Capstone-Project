@@ -29,18 +29,18 @@ const addBuilding = async (e)=>{
     if (bodyObj.buildingNumber.length === 0){
         alert("Invalid entry")
     }else {
-       const response= await fetch(`${baseUrl}property/${propertyId}`, {
+        const response= await fetch(`${baseUrl}property/${propertyId}`, {
             method:"POST",
             body: JSON.stringify(bodyObj),
             headers: headers
         })
             .catch(err=> console.error(err.message()))
-    if (response.status === 200){
-        buildingNumber.value = '';
-        return getBuildings(propertyId)
-    }else {
-        console.log("not hit")
-    }
+        if (response.status === 200){
+            buildingNumber.value = '';
+            return getBuildings(propertyId)
+        }else {
+            console.log("not hit")
+        }
     }
 };
 
@@ -56,10 +56,27 @@ const getBuildings = async (propertyId)=>{
         .catch((err=> console.error(err)))
 };
 
-const handleBuildingEdit= async (buildingId)=>{
+const handleBuildingDelete= async (buildingId)=>{
+
     let bodyObj ={
         id: buildingId,
-        body: editBuildingNumber.getAttribute("data-building-id")
+    }
+    await fetch(baseUrl + buildingId, {
+        method: "DELETE",
+        body: JSON.stringify(bodyObj),
+        headers: headers
+    })
+        .catch(err => console.error(err))
+
+    return getBuildings(propertyId)
+}
+
+const handleBuildingEdit= async (buildingId)=>{
+
+
+    let bodyObj ={
+        id: buildingId,
+        buildingNumber: editBuildingNumber.value
     }
     await fetch(baseUrl + buildingId, {
         method: "PUT",
@@ -84,8 +101,8 @@ const getBuildingById = async (buildingId)=>{
 const populateModal = (obj)=>{
 
     console.log(obj)
-    editBuildingNumber.innerText= ""
-    editBuildingNumber.innerText= obj.buildingNumber
+    editBuildingNumber.value= ""
+    editBuildingNumber.value= obj.buildingNumber
 
     updateBodyBtn.setAttribute('data-building-id', obj.id)
 };
@@ -101,10 +118,12 @@ const createCard= (arr) =>{
                     <p class="card-text" id="card-${obj.id}">${obj.buildingNumber}</p>
                     <div class="d-flex justify-content-between">
                     <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" id="edit-btn-${obj.id}" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="getBuildingById(${obj.id})">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="getBuildingById(${obj.id})">
                         EDIT
                         </button>
-                        <button>DELETE</button>
+                        <button type="button" class="btn btn-danger" onclick="handleBuildingDelete(${obj.id})">
+                        DELETE
+                        </button>
                     </div>
                 </div>
             </div>
