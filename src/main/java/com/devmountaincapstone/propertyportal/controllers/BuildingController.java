@@ -3,6 +3,7 @@ package com.devmountaincapstone.propertyportal.controllers;
 
 import com.devmountaincapstone.propertyportal.dtos.BuildingDto;
 import com.devmountaincapstone.propertyportal.service.BuildingService;
+import com.devmountaincapstone.propertyportal.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,6 @@ import java.util.Optional;
 public class BuildingController {
     @Autowired
     private BuildingService buildingService;
-
 
     @GetMapping("/property/{propertyId}")
     public List<BuildingDto> getBuildingsByPropertyId(@PathVariable Long propertyId){
