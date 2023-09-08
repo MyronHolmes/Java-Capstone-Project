@@ -107,6 +107,7 @@ const populateModal = (obj)=>{
     updateBodyBtn.setAttribute('data-building-id', obj.id)
 };
 
+
 const createCard= (arr) =>{
     buildingContainer.innerHTML=''
     arr.forEach(obj => {
@@ -114,7 +115,7 @@ const createCard= (arr) =>{
         buildingCard.classList.add("m-2");
         buildingCard.innerHTML= `
             <div class="card d-flex" style="width: 18rem; height: 18rem;">
-                <div class="card-body d-flex flex-column justify-content-between" style="height: available">
+                <div class="card-body d-flex flex-column justify-content-between" style="height: available" onclick="handleClick(${obj.id})">
                     <p class="card-text" id="card-${obj.id}">${obj.buildingNumber}</p>
                     <div class="d-flex justify-content-between">
                     <!-- Button trigger modal -->
@@ -132,6 +133,26 @@ const createCard= (arr) =>{
         buildingContainer.appendChild(buildingCard);
     })
 };
+
+const handleClick = async (buildingId)=>{
+    const response = await fetch(`${baseUrl}${buildingId}/units`, {
+        method: "GET",
+        headers: headers
+    })
+        .catch(err=> console.error(err.message))
+    const responseAry= await response.json()
+    if (response.status === 200){
+        if (responseAry.length < 2){
+            console.log('not hit')
+        }else{
+            console.log( 'hit')
+
+            document.cookie= `buildingId=${responseAry[1]}`
+            document.cookie= `buildingNumber=${responseAry[2]}`
+            window.location.replace(responseAry[0]);
+        }
+    }
+}
 
 
 

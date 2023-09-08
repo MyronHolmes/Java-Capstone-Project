@@ -9,10 +9,110 @@
     <title>Title</title>
 </head>
 <body>
+    <!--Navbar-->
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="./profile.html">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./properties.html">Properties</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./buildings.html">Buildings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./login.html" onclick="handleLogout()">Logout</a>
+        </li>
+    </ul>
+    <!--Main-->
+    <h1 class="mx-auto" style="width: 200px;" id="building-units"></h1>
+    <div id="unit-form-container">
+        <form id="unit-form">
+            <div class="form-group">
+                <label for="unit-number">Unit Number</label>
+                <input type="text" class="form-control" id="unit-number" placeholder="UNIT NUMBER">
+            </div>
+            <div class="form-group">
+                <label for="rent">Rent</label>
+                <input type="text" class="form-control" id="rent" placeholder="RENT">
+            </div>
+            <div class="form-group">
+                <label for="floor-plan">Floor Plan</label>
+                <select id="floor-plan" class="form-control">
+                    <option selected>select the unit type</option>
+                    <option value="STUDIO">Studio</option>
+                    <option value="ONE_BED_ONE_BATH">Beds: 1, Baths: 1</option>
+                    <option value="TWO_BED_ONE_BATH">Beds: 2, Baths: 1</option>
+                    <option value="TWO_BED_TWO_BATH">Beds: 2, Baths: 2</option>
+                    <option value="THREE_BED_THREE_BATH">Beds: 3, Baths: 3</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="vacancy">Vacancy Status</label>
+                <select id="vacancy" class="form-control">
+                    <option selected>select the units vacancy status</option>
+                    <option value="true">Vacant</option>
+                    <option value="false">Occupied</option>
+                </select>
+            </div>
+            <div class="mt-1">
+                <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div id="unit-container" class="w-auto h-auto d-flex justify-content-center border border-dark mt-5">
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-unit-form">
+                        <div class="form-group">
+                            <label for="edit-unit-number">Unit Number</label>
+                            <input type="text" class="form-control" id="edit-unit-number" placeholder="test">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-rent">Rent</label>
+                            <input type="text" class="form-control" id="edit-rent" placeholder="test">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-floor-plan">Floor Plan</label>
+                            <select id="edit-floor-plan" class="form-control">
+                                <option selected>select the unit type</option>
+                                <option value="STUDIO">Studio</option>
+                                <option value="ONE_BED_ONE_BATH">Beds: 1, Baths: 1</option>
+                                <option value="TWO_BED_ONE_BATH">Beds: 2, Baths: 1</option>
+                                <option value="TWO_BED_TWO_BATH">Beds: 2, Baths: 2</option>
+                                <option value="THREE_BED_THREE_BATH">Beds: 3, Baths: 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-vacancy">Vacancy Status</label>
+                            <select id="edit-vacancy" class="form-control">
+                                <option selected>select the units vacancy status</option>
+                                <option value="true">Vacant</option>
+                                <option value="false">Occupied</option>
+                            </select>
+                        </div>
+                        <div class="mt-1 modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="update-button" class="btn btn-primary" data-unit-id data-bs-dismiss="modal">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-
-<script src="./javascript/units.js"></script>
+    <script src="./javascript/units.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>

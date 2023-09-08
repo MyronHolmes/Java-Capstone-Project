@@ -3,7 +3,6 @@ package com.devmountaincapstone.propertyportal.controllers;
 
 import com.devmountaincapstone.propertyportal.dtos.BuildingDto;
 import com.devmountaincapstone.propertyportal.service.BuildingService;
-import com.devmountaincapstone.propertyportal.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,4 +38,11 @@ public class BuildingController {
     public void deleteBuildingById(@PathVariable Long buildingId){
         buildingService.deleteBuilding(buildingId);
     }
+
+    @GetMapping("/{buildingId}/units")
+    public List<String> getBuildingUnits(@PathVariable Long buildingId){
+        return buildingService.getBuildingUnits(buildingId);
+    }
+
 }
+

@@ -14,11 +14,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class UnitDto implements Serializable {
     private Long id;
-    private Integer unitNumber;
+    private Long unitNumber;
     private UnitType unitType;
     private BigDecimal rent;
     private Boolean vacancy;
-    private Byte[] thumbnail;
     private BuildingDto buildingDto;
 
     public UnitDto(Unit buildingUnit){
@@ -36,9 +35,6 @@ public class UnitDto implements Serializable {
         }
         if (buildingUnit.getVacancy() != null){
             this.vacancy = buildingUnit.getVacancy();
-        }
-        if (buildingUnit.getThumbnail() != null){
-            this.thumbnail = buildingUnit.getThumbnail();
         }
     }
 }

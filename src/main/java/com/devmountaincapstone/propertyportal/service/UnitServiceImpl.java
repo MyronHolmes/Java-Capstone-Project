@@ -50,7 +50,6 @@ public class UnitServiceImpl implements UnitService {
             unit.setUnitType(unitDto.getUnitType());
             unit.setRent(unitDto.getRent());
             unit.setVacancy(unitDto.getVacancy());
-            unit.setThumbnail(unitDto.getThumbnail());
             unitRepository.saveAndFlush(unit);
         });
     }

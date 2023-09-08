@@ -16,17 +16,17 @@ public class UnitController {
     private UnitService unitService;
 
 
-    @GetMapping("building/{buildingId}")
+    @GetMapping("/building/{buildingId}")
     public List<UnitDto> getAllUnitsByBuildingId(@PathVariable Long buildingId){
         return unitService.getAllUnitsByBuildingId(buildingId);
     }
 
-    @GetMapping("{unitId}")
+    @GetMapping("/{unitId}")
     public Optional<UnitDto> getUnitById(@PathVariable Long  unitId){
         return unitService.getUnitById(unitId);
     }
 
-    @PostMapping("building/{buildingId}")
+    @PostMapping("/building/{buildingId}")
     public void addUnit(@RequestBody UnitDto unitDto, @PathVariable Long buildingId){
         unitService.addUnit(unitDto, buildingId);
     }

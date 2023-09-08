@@ -21,7 +21,7 @@ public class Unit {
     private Long id;
 
     @Column(name = "unit_number")
-    private Integer unitNumber;
+    private Long unitNumber;
 
     @Enumerated(value = EnumType.STRING)
     private UnitType unitType;
@@ -32,29 +32,22 @@ public class Unit {
     @Column(name = "vacancy")
     private Boolean vacancy;
 
-    @Column(name = "thumbnail")
-    @Lob
-    private Byte[] thumbnail;
-
     @ManyToOne
     @JsonBackReference
     private Building building;
 
-    public Unit(UnitDto buildingUnitDto){
-        if (buildingUnitDto.getUnitNumber() != null){
-            this.unitNumber = buildingUnitDto.getUnitNumber();
+    public Unit(UnitDto unitDto){
+        if (unitDto.getUnitNumber() != null){
+            this.unitNumber = unitDto.getUnitNumber();
         }
-        if (buildingUnitDto.getUnitType() != null){
-            this.unitType = buildingUnitDto.getUnitType();
+        if (unitDto.getUnitType() != null){
+            this.unitType = unitDto.getUnitType();
         }
-        if (buildingUnitDto.getRent() != null){
-            this.rent = buildingUnitDto.getRent();
+        if (unitDto.getRent() != null){
+            this.rent = unitDto.getRent();
         }
-        if (buildingUnitDto.getVacancy() != null){
-            this.vacancy = buildingUnitDto.getVacancy();
-        }
-        if (buildingUnitDto.getThumbnail() != null){
-            this.thumbnail = buildingUnitDto.getThumbnail();
+        if (unitDto.getVacancy() != null){
+            this.vacancy = unitDto.getVacancy();
         }
     }
 }

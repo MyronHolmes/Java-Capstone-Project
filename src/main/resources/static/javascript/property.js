@@ -14,7 +14,6 @@ const baseUrl = 'http://localhost:8080/properties/'
 const listProperties = arr =>{
     for(let i = 0; i < arr.length; i++){
 
-
         let propertyId = arr[i].id
         let propertyName = arr[i].propertyName
         let li = document.createElement("li");

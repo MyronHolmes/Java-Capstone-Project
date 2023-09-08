@@ -19,4 +19,6 @@ public interface BuildingService {
     List<BuildingDto> getAllBuildingsByPropertyId(Long propertyId);
 
     Optional<BuildingDto> getBuildingById(Long buildingId);
+
+    List<String> getBuildingUnits(Long buildingId);
 }

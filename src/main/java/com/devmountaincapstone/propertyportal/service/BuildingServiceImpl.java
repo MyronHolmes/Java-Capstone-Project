@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     @Transactional
-    public void addBuilding(BuildingDto buildingDto, Long propertyId){
+    public void addBuilding(BuildingDto buildingDto, Long propertyId) {
         Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
         Building building = new Building(buildingDto);
         propertyOptional.ifPresent(building::setProperty);
@@ -37,14 +38,14 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     @Transactional
-    public void deleteBuilding(Long buildingId){
+    public void deleteBuilding(Long buildingId) {
         Optional<Building> buildingOptional = buildingRepository.findById(buildingId);
         buildingOptional.ifPresent(building -> buildingRepository.delete(building));
     }
 
     @Override
     @Transactional
-    public void updateBuildingById(BuildingDto buildingDto){
+    public void updateBuildingById(BuildingDto buildingDto) {
         Optional<Building> buildingOptional = buildingRepository.findById(buildingDto.getId());
         buildingOptional.ifPresent(building -> {
             building.setBuildingNumber(buildingDto.getBuildingNumber());
@@ -53,9 +54,9 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public List<BuildingDto> getAllBuildingsByPropertyId(Long propertyId){
+    public List<BuildingDto> getAllBuildingsByPropertyId(Long propertyId) {
         Optional<Property> propertyOptional = propertyRepository.findById(propertyId);
-        if (propertyOptional.isPresent()){
+        if (propertyOptional.isPresent()) {
             List<Building> buildingList = buildingRepository.findByPropertyEquals(propertyOptional.get());
             return buildingList.stream().map(building -> new BuildingDto(building)).collect(Collectors.toList());
         }
@@ -65,12 +66,27 @@ public class BuildingServiceImpl implements BuildingService {
 
 
     @Override
-    public Optional<BuildingDto> getBuildingById(Long buildingId){
+    public Optional<BuildingDto> getBuildingById(Long buildingId) {
         Optional<Building> buildingOptional = buildingRepository.findById(buildingId);
-        if (buildingOptional.isPresent()){
+        if (buildingOptional.isPresent()) {
             return Optional.of(new BuildingDto(buildingOptional.get()));
         }
         return Optional.empty();
     }
 
+    @Override
+    public List<String> getBuildingUnits(Long buildingId) {
+        List<String> response = new ArrayList<>();
+        Optional<Building> buildingOptional = buildingRepository.findById(buildingId);
+
+        if (buildingOptional.isPresent()) {
+            response.add("http://localhost:8080/units.html");
+            response.add(String.valueOf(buildingOptional.get().getId()));
+            response.add(String.valueOf(buildingOptional.get().getBuildingNumber()));
+
+        } else {
+            response.add("error");
+        }
+        return response;
+    }
 }
