@@ -12,6 +12,10 @@ let editRent = document.getElementById("edit-rent")
 let editUnitType= document.getElementById("edit-floor-plan")
 let editVacancy = document.getElementById("edit-vacancy")
 let updateBtn = document.getElementById("update-button")
+let optionV = document.getElementById("option-vacancy")
+let optionVM = document.getElementById("option-vacancy-m")
+let optionU = document.getElementById("option-unit-type")
+let optionUM = document.getElementById("option-unit-type-m")
 
 let buildingNumber =getCookie("buildingNumber");
 let buildingId = getCookie("buildingId");
@@ -61,6 +65,12 @@ const addUnit = async (e) =>{
         .catch(err=> console.error(err))
     if (response.status === 200){
         console.log("posted")
+        inputUnitNumber.value= ''
+        inputRent.value= ''
+        inputUnitType.value = optionU.value
+        inputVacancy.value = optionV.value
+
+        return getUnits(buildingId)
     }else{
         console.log("not posted")
     }
@@ -72,8 +82,10 @@ const populateModal = (obj)=>{
     editUnitNumber.value= obj.unitNumber
     editRent.value=""
     editRent.value = obj.rent
+    editUnitType.value = optionUM
     editUnitType.value = obj.unitType
-    editVacancy= obj.vacancy
+    editVacancy.value= optionVM
+    editVacancy.value = obj.vacancy
 
     updateBtn.setAttribute('data-unit-id', obj.id)
 };
@@ -86,6 +98,7 @@ const handleUnitEdit = async (unitId)=>{
         unitType: editUnitType.value,
         vacancy: editVacancy.value
     }
+    console.log(bodyObj)
     editUnitNumber.value =''
     editRent = ''
 
