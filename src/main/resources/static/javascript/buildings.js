@@ -12,7 +12,6 @@ let editBuildingNumber = document.getElementById("edit-building-number");
 
 const userId = getCookie("userId");
 const propertyId = getCookie("propertyId");
-console.log(getCookie("propertyId"))
 propertyName.innerText = getCookie("propertyName")+"'s Buildings:";
 
 const headers = {
@@ -39,7 +38,6 @@ const addBuilding = async (e)=>{
             buildingNumber.value = '';
             return getBuildings(propertyId)
         }else {
-            console.log("not hit")
         }
     }
 };
@@ -100,7 +98,6 @@ const getBuildingById = async (buildingId)=>{
 
 const populateModal = (obj)=>{
 
-    console.log(obj)
     editBuildingNumber.value= ""
     editBuildingNumber.value= obj.buildingNumber
 
@@ -116,7 +113,7 @@ const createCard= (arr) =>{
         buildingCard.innerHTML= `
             <div class="card d-flex" style="width: 18rem; height: 18rem;">
                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">
-                    <p class="card-text" id="card-${obj.id}" onclick="handleClick(${obj.id})">${obj.buildingNumber}</p>
+                    <h2 class="card-text link-primary display-1 d-flex flex-row justify-content-center" id="card-${obj.id}" onclick="handleClick(${obj.id})">${obj.buildingNumber}</h2>
                     <div class="d-flex justify-content-between">
                     <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="getBuildingById(${obj.id})">
@@ -143,9 +140,7 @@ const handleClick = async (buildingId)=>{
     const responseAry= await response.json()
     if (response.status === 200){
         if (responseAry.length < 2){
-            console.log('not hit')
         }else{
-            console.log( 'hit')
 
             document.cookie= `buildingId=${responseAry[1]}`
             document.cookie= `buildingNumber=${responseAry[2]}`
@@ -179,6 +174,5 @@ getBuildings(propertyId);
 buildingForm.addEventListener("submit", addBuilding);
 updateBodyBtn.addEventListener("click", (e)=>{
     let buildingId = e.target.getAttribute("data-building-id")
-    console.log(buildingId)
     handleBuildingEdit(buildingId)
 })

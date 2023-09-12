@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface UnitRepository extends JpaRepository<Unit, Long> {
     List<Unit> findByBuildingEquals(Building building);
+    List<Unit> findAllByVacancyEquals(Unit unit);
 }

@@ -34,7 +34,7 @@ const listProperties = arr =>{
         deleteBtn.innerHTML ="Delete"
         li.appendChild(deleteBtn);
         let buildingLink = document.createElement("h3");
-        buildingLink.classList.add("visible")
+        buildingLink.classList.add("visible", "link-primary")
         buildingLink.innerHTML= propertyName + ": $" + projectedEarnings;
         li.appendChild(buildingLink);
         let input = document.createElement("input");
@@ -67,10 +67,7 @@ const listProperties = arr =>{
             const responseAy= await response.json()
             if (response.status === 200){
                 if (responseAy.length < 2){
-                    console.log('not hit')
                 }else{
-                    console.log( 'hit')
-
                     document.cookie= `propertyId=${responseAy[1]}`
                     document.cookie= `propertyName=${responseAy[2]}`
                     window.location.replace(responseAy[0]);
@@ -95,7 +92,7 @@ const listProperties = arr =>{
             }else if (actionBtn !== "Save"){
                 buildingLink.classList.replace("visible", "invisible")
                 input.classList.replace("invisible", "visible")
-                input.value = buildingLink.innerHTML;
+                input.value = propertyName;
                 actionBtn.innerHTML= "Save"
             }
 
