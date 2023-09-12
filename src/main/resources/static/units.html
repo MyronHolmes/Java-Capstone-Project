@@ -12,9 +12,6 @@
     <!--Navbar-->
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link" href="./profile.html">Profile</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="./properties.html">Properties</a>
         </li>
         <li class="nav-item">
@@ -28,15 +25,15 @@
     <h1 class="mx-auto" style="width: 200px;" id="building-units"></h1>
     <div id="unit-form-container">
         <form id="unit-form">
-            <div class="form-group">
+            <div class="form-group w-50">
                 <label for="unit-number">Unit Number</label>
                 <input type="text" class="form-control" id="unit-number" placeholder="UNIT NUMBER">
             </div>
-            <div class="form-group">
+            <div class="form-group w-50">
                 <label for="rent">Rent</label>
                 <input type="text" class="form-control" id="rent" placeholder="RENT">
             </div>
-            <div class="form-group">
+            <div class="form-group w-50">
                 <label for="floor-plan">Floor Plan</label>
                 <select id="floor-plan" class="form-control">
                     <option id="option-unit-type" selected>select the unit type</option>
@@ -47,8 +44,8 @@
                     <option value="THREE_BED_THREE_BATH">Beds: 3, Baths: 3</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="vacancy">Vacancy Status</label>
+            <div class="form-group w-50">
+                <label for="vacancy">Status</label>
                 <select id="vacancy" class="form-control">
                     <option id="option-vacancy" selected>select the units vacancy status</option>
                     <option value="true">Vacant</option>
@@ -93,7 +90,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="edit-vacancy">Vacancy Status</label>
+                            <label for="edit-vacancy">Status</label>
                             <select id="edit-vacancy" class="form-control">
                                 <option id="option-vacancy-m" selected>select the units vacancy status</option>
                                 <option value="true">Vacant</option>

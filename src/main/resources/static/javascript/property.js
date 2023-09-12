@@ -16,6 +16,7 @@ const listProperties = arr =>{
 
         let propertyId = arr[i].id
         let propertyName = arr[i].propertyName
+        let projectedEarnings = arr[i].projectedEarnings
         let li = document.createElement("li");
         li.classList.add("d-flex", "justify-content-center")
         let actionBtn = document.createElement("button")
@@ -34,7 +35,7 @@ const listProperties = arr =>{
         li.appendChild(deleteBtn);
         let buildingLink = document.createElement("h3");
         buildingLink.classList.add("visible")
-        buildingLink.innerHTML= propertyName;
+        buildingLink.innerHTML= propertyName + ": $" + projectedEarnings;
         li.appendChild(buildingLink);
         let input = document.createElement("input");
         input.classList.add("invisible");
@@ -130,7 +131,7 @@ const addProperty = async (e) =>{
     e.preventDefault();
     let bodyObj ={
         propertyName: propertyName.value,
-        projectedEarnings: propertyEarnings.value
+
     }
 
 
@@ -146,7 +147,6 @@ const addProperty = async (e) =>{
             .catch(err => console.error(err.message))
         if (response.status === 200) {
             propertyName.value= '';
-            propertyEarnings.value = '';
             return getProperties(userId)
 
         }

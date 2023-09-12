@@ -56,24 +56,35 @@ const addUnit = async (e) =>{
         unitType: inputUnitType.value,
         vacancy: inputVacancy.value
     }
-    console.log(bodyObj)
-    const response = await fetch(`${baseUrl}building/${buildingId}`, {
-        method: "POST",
-        body: JSON.stringify(bodyObj),
-        headers: headers
-    })
-        .catch(err=> console.error(err))
-    if (response.status === 200){
-        console.log("posted")
-        inputUnitNumber.value= ''
-        inputRent.value= ''
-        inputUnitType.value = optionU.value
-        inputVacancy.value = optionV.value
 
-        return getUnits(buildingId)
-    }else{
-        console.log("not posted")
+    if (bodyObj.unitNumber === ''){
+        alert("Invalid Entry")
+    } else if (bodyObj.rent === ''){
+        alert("Invalid Entry")
+    }else if (bodyObj.unitType === "select the unit type"){
+        alert("Invalid Entry")
+    }else if(bodyObj.vacancy === "select the units vacancy status"){
+        alert("Invalid Entry")
+    } else {
+        const response = await fetch(`${baseUrl}building/${buildingId}`, {
+            method: "POST",
+            body: JSON.stringify(bodyObj),
+            headers: headers
+        })
+            .catch(err=> console.error(err))
+        if (response.status === 200){
+            console.log("posted")
+            inputUnitNumber.value= ''
+            inputRent.value= ''
+            inputUnitType.value = optionU.value
+            inputVacancy.value = optionV.value
+
+            return getUnits(buildingId)
+        }else{
+            console.log("not posted")
+        }
     }
+
 }
 
 const populateModal = (obj)=>{
@@ -100,7 +111,7 @@ const handleUnitEdit = async (unitId)=>{
     }
     console.log(bodyObj)
     editUnitNumber.value =''
-    editRent = ''
+    editRent.value = ''
 
     await fetch(baseUrl + unitId, {
         method: "PUT",
@@ -126,8 +137,26 @@ const handleUnitDelete = async (unitId)=>{
 }
 
 const createCard = (arr)=>{
+
     unitContainer.innerHTML=''
     arr.forEach(obj => {
+        if (obj.unitType === "STUDIO") {
+            obj.unitType = "Studio"
+        } if (obj.unitType === "ONE_BED_ONE_BATH") {
+            obj.unitType = "Beds: 1, Baths: 1"
+        } if (obj.unitType === "TWO_BED_ONE_BATH") {
+            obj.unitType = "Beds: 2, Baths: 1"
+        } if (obj.unitType === "TWO_BED_TWO_BATH") {
+            obj.unitType = "Beds: 2, Baths: 2"
+        } if (obj.unitType === "THREE_BED_THREE_BATH") {
+            obj.unitType = "Beds: 3, Baths: 3"
+        } if (obj.vacancy === true) {
+            obj.vacancy = "Vacant"
+        }if (obj.vacancy === false) {
+            obj.vacancy = "Occupied"
+        }
+
+
         let unitCard = document.createElement("div");
         unitCard.classList.add("m-2");
         unitCard.innerHTML = `
@@ -136,7 +165,7 @@ const createCard = (arr)=>{
                     <p class="card-text" id="card-${obj.id}">Unit: ${obj.unitNumber} <br>
                     Rent: $${obj.rent}<br>
                     Floor Plan: ${obj.unitType}<br>
-                    Vacancy: ${obj.vacancy}</p>
+                    Status: ${obj.vacancy}</p>
                     <div class="d-flex justify-content-between">
                     <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="getUnitById(${obj.id})">

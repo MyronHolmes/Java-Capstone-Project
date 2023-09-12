@@ -115,8 +115,8 @@ const createCard= (arr) =>{
         buildingCard.classList.add("m-2");
         buildingCard.innerHTML= `
             <div class="card d-flex" style="width: 18rem; height: 18rem;">
-                <div class="card-body d-flex flex-column justify-content-between" style="height: available" onclick="handleClick(${obj.id})">
-                    <p class="card-text" id="card-${obj.id}">${obj.buildingNumber}</p>
+                <div class="card-body d-flex flex-column justify-content-between" style="height: available">
+                    <p class="card-text" id="card-${obj.id}" onclick="handleClick(${obj.id})">${obj.buildingNumber}</p>
                     <div class="d-flex justify-content-between">
                     <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="getBuildingById(${obj.id})">
