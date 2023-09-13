@@ -12,4 +12,6 @@ import java.util.Optional;
 @Repository
 public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> findByLandlordEquals(Landlord landlord);
+
+
 }

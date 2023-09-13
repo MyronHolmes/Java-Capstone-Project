@@ -5,6 +5,7 @@ import com.devmountaincapstone.propertyportal.dtos.UnitDto;
 import com.devmountaincapstone.propertyportal.entites.Building;
 import com.devmountaincapstone.propertyportal.entites.Unit;
 import com.devmountaincapstone.propertyportal.repository.BuildingRepository;
+import com.devmountaincapstone.propertyportal.repository.PropertyRepository;
 import com.devmountaincapstone.propertyportal.repository.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class UnitServiceImpl implements UnitService {
     private UnitRepository unitRepository;
     @Autowired
     private BuildingRepository buildingRepository;
+    @Autowired
+    private PropertyRepository propertyRepository;
 
 
     @Override
@@ -30,6 +33,7 @@ public class UnitServiceImpl implements UnitService {
         Unit unit = new Unit(unitDto);
         buildingOptional.ifPresent(unit::setBuilding);
         unitRepository.saveAndFlush(unit);
+
     }
 
     @Override

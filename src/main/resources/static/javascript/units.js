@@ -134,8 +134,6 @@ const handleUnitDelete = async (unitId)=>{
 }
 
 const createCard = (arr)=>{
-    console.log(arr)
-
     unitContainer.innerHTML=''
     arr.forEach(obj => {
         if (obj.unitType === "STUDIO") {

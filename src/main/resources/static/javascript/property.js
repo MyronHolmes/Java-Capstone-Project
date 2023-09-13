@@ -35,7 +35,7 @@ const listProperties = arr =>{
         li.appendChild(deleteBtn);
         let buildingLink = document.createElement("h3");
         buildingLink.classList.add("visible", "link-primary")
-        buildingLink.innerHTML= propertyName + ": $" + projectedEarnings;
+        buildingLink.innerHTML= propertyName;
         li.appendChild(buildingLink);
         let input = document.createElement("input");
         input.classList.add("invisible");
@@ -92,7 +92,7 @@ const listProperties = arr =>{
             }else if (actionBtn !== "Save"){
                 buildingLink.classList.replace("visible", "invisible")
                 input.classList.replace("invisible", "visible")
-                input.value = propertyName;
+                input.value = buildingLink.innerHTML;
                 actionBtn.innerHTML= "Save"
             }
 
@@ -158,12 +158,6 @@ const handleLogout = () =>{
     for (let i in c){
         document.cookie = /^[^=]+/.exec(c[i])[0]+"=;expires= Thu, 01 Jan 1970 00:00:00 GMT"
     }
-}
-
-
-
-function setCookie(name, value){
-    document.cookie = `${name}=${value}`
 }
 
 function getCookie(name){
