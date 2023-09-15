@@ -100,6 +100,9 @@ const populateModal = (obj)=>{
 
     editBuildingNumber.value= ""
     editBuildingNumber.value= obj.buildingNumber
+    editBuildingNumber.setAttribute("placeholder", "" )
+    editBuildingNumber.setAttribute("placeholder", `${obj.buildingNumber}` )
+
 
     updateBodyBtn.setAttribute('data-building-id', obj.id)
 };
