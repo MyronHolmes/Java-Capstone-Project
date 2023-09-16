@@ -12,4 +12,4 @@ My goal for this project is to allow the user to keep track of the properties th
 
 ## MakeUp
 This project uses Java, Spring, Hibernate, HTML5, CSS, Bootstrap, JavaScript and PostgreSQL. Entity, DTO, Repository, Controller and Services classes were created for Landlords, Properties, Buildings and Units in order to complete the back end. While HTML, CSS and JavaScript files for Register, Login, Property, Building and Units were created for the front end.
-[Here is a video link of the demo video for the Cookbook Manager](https://youtu.be/qUBWoKF-Kds)
+[Here is a demo link of the Property Portal](https://youtu.be/VdTFwFF-Mds)
